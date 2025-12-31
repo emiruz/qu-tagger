@@ -2,7 +2,7 @@
 
 This a proof-of-concept for a unsupervised query tagging system for OpenStreetMap
 data which uses just gazeteers and evidence theory. It is a complement to the 
-write-up to be posted [https://emiruz.com/post/2026-01-03-qu-tagger/](here).
+write-up to be posted (here)[https://emiruz.com/post/2026-01-03-qu-tagger/].
 
 The proof-of-concept tags queries such as `fish and chip restaurant near leicester square`
 with 5 tags: POI, GEO, FOOD, CAT, PROX. So the result for the example would be something
