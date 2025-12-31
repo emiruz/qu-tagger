@@ -1,7 +1,7 @@
 # Query understanding via evidence theory
 
 This a proof-of-concept for a unsupervised query tagging system for OpenStreetMap
-data which uses just gazetteers and evidence theory. It is a complement to the 
+queries which uses just gazetteers and evidence theory. It is a complement to the 
 write-up to be posted [here](https://emiruz.com/post/2026-01-03-qu-tagger/).
 
 The proof-of-concept tags queries such as `fish and chip restaurant near leicester square`
