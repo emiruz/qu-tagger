@@ -27,10 +27,9 @@ def ngrams(q, n):
     f = lambda n: [tuple(range(i, i+n)) for i in range(len(q)-n+1)]
     return set(chain(*[f(x) for x in range(1, n+1)]))
 
-def gazetteer(q, lam=[8,3,1], Ps=[0.20, 0.4, 0.4], ngram=3):
+def gazetteer(q, subs, lam=[8,3,1], Ps=[0.20, 0.4, 0.4], ngram=3):
     grams = ngrams(q, ngram)
     lemma = lemmatise(q)
-    subs  = Subsets(slots=len(q), opts=opts)
 
     for g in grams:
         sgs  = '"' + " ".join(stem(q[i]) for i in g) + '"'
@@ -105,17 +104,12 @@ def P_ref(alpha, k, x0):
 def tag_query(q, ngram=3, verbose=True):
     q     = normalise(q)
     n     = len(q)
-    subs  = Subsets(slots=n, opts=opts)
+    subs  = Subsets(slots=n, opts=[opts] * n)
     model = Inference(method="dubois-prade")
-    mass  = list(chain(
-        priors(q, subs),
-        gazetteer(q)))
+    mass  = list(chain(priors(q, subs), gazetteer(q, subs)))
 
-    if verbose:
-        print_summary(mass)
-    
+    if verbose: print_summary(mass)
     for m in mass: model.add_mass(m)
-
     return label_query(q, subs,  model)
 
 def test_assert(q):
