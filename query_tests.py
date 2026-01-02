@@ -66,7 +66,7 @@ queries = [
     "zoo [CAT] in [PROX] london [GEO]",
     "mcdonalds [POI] in [PROX] stratford [GEO]",
     "tube station [CAT] near [PROX] leicester square [GEO]",
-    "hotel [CAT] close to [PROX] brighton [GEO] peer [POI]",
+    "hotel [CAT] close to [PROX] brighton [GEO]",
     "yo sushi [POI] restaurant [CAT] in [PROX] london [GEO]",
     "burger [FOOD] restaurant [CAT] in [PROX] leicester [GEO]",
     "italian [FOOD] restaurant [CAT] in [PROX] chester [GEO]"

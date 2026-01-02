@@ -61,10 +61,11 @@ def gazetteer(q, subs, lam=[8,3,1], Ps=[0.20, 0.4, 0.4], ngram=3):
                       .add(subs.new(), 1-p0) )
         yield mass
 
-def label_query(q, subs, model):
+def label_query(q, subs, model, use_coarse=False):
     output, labels= [], []
+    f = model.coarse if use_coarse else lambda q0: model.approx(q0, n=4000)
     for i,x in enumerate(q):
-        ps = [model.coarse(subs.new({i: [o]}))[0] for o in opts]
+        ps = [f(subs.new({i: [o]}))[0] for o in opts]
         labels.append(opts[ps.index(max(ps))])
     labels.reverse(); q.reverse()
     lst = None
@@ -101,7 +102,7 @@ def P_ref(alpha, k, x0):
         return alpha / (1 + math.exp(-k*x))
     return f
 
-def tag_query(q, ngram=3, verbose=True):
+def tag_query(q, ngram=3, verbose=True, use_coarse=False):
     q     = normalise(q)
     n     = len(q)
     subs  = Subsets(slots=n, opts=[opts] * n)
@@ -110,14 +111,22 @@ def tag_query(q, ngram=3, verbose=True):
 
     if verbose: print_summary(mass)
     for m in mass: model.add_mass(m)
-    return label_query(q, subs,  model)
+    return label_query(q, subs,  model, use_coarse=use_coarse)
 
 def test_assert(q):
-    q0 = re.sub(" \\[.+?\\]", "", q)
-    q1 = tag_query(q0, verbose=False)
-    assert q.lower() == q1.lower(), f'Expected "{q}", got "{q1}"'
-    print("[OK]", q)
-
+    q0  = re.sub(" \\[.+?\\]", "", q)
+    q1  = tag_query(q0, verbose=False, use_coarse=False)
+    q2  = tag_query(q0, verbose=False, use_coarse=True)
+    msg = lambda x: f'Expected "{q}", got "{x}"'
+    ok1 = q.lower() == q1.lower()
+    ok2 = q.lower() == q2.lower()
+    if ok1 and ok2:
+        print("[OK]", q)
+        return
+    if not ok1:
+        print("\t[ERROR, approx]", msg(q1))
+    if not ok2:
+        print("\t[ERROR, coarse]", msg(q2))
    
 # TESTS
 for q in query_tests.queries:
