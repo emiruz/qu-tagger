@@ -127,7 +127,8 @@ def test_assert(q):
         print("\t[ERROR, approx]", msg(q1))
     if not ok2:
         print("\t[ERROR, coarse]", msg(q2))
-   
+ 
 # TESTS
-for q in query_tests.queries:
-    test_assert(q)
+if __name__ == "__main__":
+    for q in query_tests.queries:
+        test_assert(q)

@@ -2,7 +2,7 @@
 
 This a proof-of-concept for a unsupervised query tagging system for OpenStreetMap
 queries which uses just gazetteers and evidence theory. It is a complement to the 
-write-up to be posted [here](https://emiruz.com/post/2026-01-03-qu-tagger/).
+write-up posted [here](https://emiruz.com/post/2026-01-17-qu-tagger/).
 
 The proof-of-concept tags queries such as `fish and chip restaurant near leicester square`
 with 5 tags: `POI, GEO, FOOD, CAT, PROX`. So the result for the example would be
@@ -19,7 +19,9 @@ data.
 1. Evidence theory based hypothesis selection. The evidence model has just 9 intuitive
    parameters: the results herein required almost no tuning.
    
-2. Efficient binary coarsening inference using Yager rule: fast even with Python. See
+2. Explainable tagging.
+   
+3. Efficient binary coarsening inference using Yager rule: fast even with Python. See
    package https://github.com/emiruz/pyevidence/ .
 
 
