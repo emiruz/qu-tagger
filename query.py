@@ -88,19 +88,12 @@ def print_summary(evidence):
 
 def priors(q, subs):
     for i,x in enumerate(q):
-        is_num = bool(re.match("[a-zxo]*[0-9]+", x))
+        is_num = bool(re.match("[a-z]*[0-9]+", x))
         mass = ( Mass()
                  .add(subs.new({i: ["GEO"] if is_num else ["POI"]}),
                       0.1 if is_num else 0.001)
                  .add(subs.new(), 0.9 if is_num else 0.999) )
         yield mass
-
-def P_ref(alpha, k, x0):
-    def f(n,l):
-        if n * l == 0: return 0
-        x = n * l - x0
-        return alpha / (1 + math.exp(-k*x))
-    return f
 
 def tag_query(q, ngram=3, verbose=True, use_coarse=False):
     q     = normalise(q)
