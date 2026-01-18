@@ -121,3 +121,92 @@ Here are some tagging examples from the `query.py` output:
 [OK] burger [FOOD] restaurant [CAT] in [PROX] leicester [GEO]
 [OK] italian [FOOD] restaurant [CAT] in [PROX] chester [GEO]
 ```
+
+Here is an example of the diagnostic information available at a query
+level.
+```
+>>> tag_query("pie and mash, tavistock square")
+--------------------------------------------------------
+
+len(evidence) = 14.
+No. 0
+	 {'POI'} * * * * -> 0.001
+	 * * * * * -> 0.999
+No. 1
+	 * {'POI'} * * * -> 0.001
+	 * * * * * -> 0.999
+No. 2
+	 * * {'POI'} * * -> 0.001
+	 * * * * * -> 0.999
+No. 3
+	 * * * {'POI'} * -> 0.001
+	 * * * * * -> 0.999
+No. 4
+	 * * * * {'POI'} -> 0.001
+	 * * * * * -> 0.999
+No. 5
+	 {'POI'} {'POI'} * * * -> 0.0087
+	 {'GEO'} {'GEO'} * * * -> 0.0
+	 {'CAT'} {'CAT'} * * * -> 0.0
+	 {'FOOD'} {'FOOD'} * * * -> 0.3913
+	 {'PROX'} {'PROX'} * * * -> 0.0
+	 * * * * * -> 0.6
+No. 6
+	 * * {'POI'} * * -> 0.0118
+	 * * {'GEO'} * * -> 0.0
+	 * * {'CAT'} * * -> 0.0
+	 * * {'FOOD'} * * -> 0.1882
+	 * * {'PROX'} * * -> 0.0
+	 * * * * * -> 0.8
+No. 7
+	 * {'POI'} {'POI'} * * -> 0.0087
+	 * {'GEO'} {'GEO'} * * -> 0.0
+	 * {'CAT'} {'CAT'} * * -> 0.0
+	 * {'FOOD'} {'FOOD'} * * -> 0.3913
+	 * {'PROX'} {'PROX'} * * -> 0.0
+	 * * * * * -> 0.6
+No. 8
+	 * * * {'POI'} {'POI'} -> 0.0392
+	 * * * {'GEO'} {'GEO'} -> 0.1301
+	 * * * {'CAT'} {'CAT'} -> 0.0
+	 * * * {'FOOD'} {'FOOD'} -> 0.0
+	 * * * {'PROX'} {'PROX'} -> 0.0
+	 * * * * * -> 0.8307
+No. 9
+	 {'POI'} {'POI'} {'POI'} * * -> 0.0087
+	 {'GEO'} {'GEO'} {'GEO'} * * -> 0.0
+	 {'CAT'} {'CAT'} {'CAT'} * * -> 0.0
+	 {'FOOD'} {'FOOD'} {'FOOD'} * * -> 0.3913
+	 {'PROX'} {'PROX'} {'PROX'} * * -> 0.0
+	 * * * * * -> 0.6
+No. 10
+	 * * * * {'POI'} -> 0.036
+	 * * * * {'GEO'} -> 0.0958
+	 * * * * {'CAT'} -> 0.0313
+	 * * * * {'FOOD'} -> 0.0
+	 * * * * {'PROX'} -> 0.0
+	 * * * * * -> 0.8368
+No. 11
+	 * {'POI'} * * * -> 0.0002
+	 * {'GEO'} * * * -> 0.0001
+	 * {'CAT'} * * * -> 0.0002
+	 * {'FOOD'} * * * -> 0.1994
+	 * {'PROX'} * * * -> 0.0
+	 * * * * * -> 0.8
+No. 12
+	 {'POI'} * * * * -> 0.0084
+	 {'GEO'} * * * * -> 0.0042
+	 {'CAT'} * * * * -> 0.0
+	 {'FOOD'} * * * * -> 0.1874
+	 {'PROX'} * * * * -> 0.0
+	 * * * * * -> 0.8
+No. 13
+	 * * * {'POI'} * -> 0.0045
+	 * * * {'GEO'} * -> 0.0337
+	 * * * {'CAT'} * -> 0.0
+	 * * * {'FOOD'} * -> 0.0
+	 * * * {'PROX'} * -> 0.0
+	 * * * * * -> 0.9618
+--------------------------------------------------------
+'pie and mash [FOOD] tavistock square [GEO]'
+```
